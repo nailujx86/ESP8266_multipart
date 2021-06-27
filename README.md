@@ -3,8 +3,14 @@
 ## License
 This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/nailujx86/ESP8266_multipart) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
 ## Installation
-(Arduino IDE) Download this repository as a zip file and extract it to your arduino library folder. https://github.com/nailujx86/ESP8266_multipart/archive/master.zip  
-Now don't forget to include the header file in your includes.
+### PlatformIO
+Add the line below to your lib_deps or search for "ESP8266_multipart" in the PlatformIO Library Browser.  
+```lib_deps = nailujx86/ESP8266_multipart @ ^1.0.1```  
+See more at: https://platformio.org/lib/show/12469/ESP8266_multipart
+### Arduino
+Search for "ESP8266_multipart" in the Arduino Library Browser  
+or  
+Download this repository as a zip file and extract it to your arduino library folder. https://github.com/nailujx86/ESP8266_multipart/archive/master.zip  
 ## Usage
 ``` cpp
 // Header include
