@@ -1,6 +1,6 @@
 {
     "name": "ESP8266_multipart",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/nailujx86/ESP8266_multipart"
