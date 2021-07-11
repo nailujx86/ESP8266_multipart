@@ -14,6 +14,7 @@ class ESP8266_multipart {
   private:
     const char* host;
     int port;
+    bool binary;
     void init(const char* host, int port);
 };
 

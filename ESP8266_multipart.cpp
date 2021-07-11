@@ -12,6 +12,7 @@ ESP8266_multipart::ESP8266_multipart(const char* host) {
 void ESP8266_multipart::init(const char* host, int port) {
   this->host = host;
   this->port = port;
+  this->binary = false;
 }
 int ESP8266_multipart::sendFile(String path, File file) {
   return sendFile(path.c_str(), file);
@@ -25,6 +26,10 @@ void ESP8266_multipart::setHost(String host) {
 void ESP8266_multipart::setHost(const char* host) {
   this->host = host;
 }
+void ESP8266_multipart::setBinary(bool binary) {
+  this->binary = binary;
+}
+
 int ESP8266_multipart::sendFile(const char* path, File file) {
   WiFiClient client;
   if(client.connect(this->host, this->port)) {
@@ -36,18 +41,32 @@ int ESP8266_multipart::sendFile(const char* path, File file) {
     client.print(F("Content-Type: multipart/form-data; boundary=X-ESP8266_MULTIPART\r\n"));
     String tmpFront = "--X-ESP8266_MULTIPART\r\nContent-Disposition: form-data; name=\"";
     tmpFront += file.name();
-    tmpFront += "\"\r\n\r\n";
+    tmpFront += "\"\r\n";
+    if(this->binary) {
+      tmpFront += "Content-Type: application/octet-stream\r\n";
+    }
+    tmpFront += "\r\n";
     String tmpBack = "\r\n--X-ESP8266_MULTIPART--\r\n\r\n";
     int dataLength = tmpFront.length() + tmpBack.length() + file.size();
     client.print(F("Content-Length: ")); client.print(dataLength); client.print(F("\r\n\r\n"));
     client.print(tmpFront);
     int tempPos = file.position();
     file.seek(0, SeekSet);
-    while(file.available()) {
-      while(file.position() < file.size()) {
-        String dataBuffer = file.readStringUntil('\n');
-        client.print(dataBuffer);
-        client.print("\n");
+    if(this->binary) {
+      uint8_t dataBuffer[128];
+      while(file.available()) {
+        while(file.position() < file.size()) {
+          size_t len = file.readBytes((char *)dataBuffer, sizeof(dataBuffer));
+          client.write(dataBuffer, len);
+        }
+      }
+    } else {
+      while(file.available()) {
+        while(file.position() < file.size()) {
+          String dataBuffer = file.readStringUntil('\n');
+          client.print(dataBuffer);
+          client.print("\n");
+        }
       }
     }
     client.print(tmpBack);
