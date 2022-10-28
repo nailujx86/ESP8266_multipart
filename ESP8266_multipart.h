@@ -11,6 +11,7 @@ class ESP8266_multipart {
     void setPort(int port);
     void setHost(String host);
     void setHost(const char* host);
+    void setBinary(bool binary);
   private:
     const char* host;
     int port;
