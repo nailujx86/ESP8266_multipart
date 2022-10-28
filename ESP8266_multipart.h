@@ -1,4 +1,4 @@
-#include "ESP8266WiFi.h"
+#include "WiFi.h"
 #include "FS.h"
 
 class ESP8266_multipart {
