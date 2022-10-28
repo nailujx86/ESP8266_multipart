@@ -39,7 +39,7 @@ int ESP8266_multipart::sendFile(const char* path, File file) {
     client.print(F("Accept: */*\r\n"));
     client.print(F("Connection: close\r\n"));
     client.print(F("Content-Type: multipart/form-data; boundary=X-ESP8266_MULTIPART\r\n"));
-    String tmpFront = "--X-ESP8266_MULTIPART\r\nContent-Disposition: form-data; name=\"";
+    String tmpFront = "--X-ESP8266_MULTIPART\r\nContent-Disposition: form-data; name=\"file\"; filename=\"";
     tmpFront += file.name();
     tmpFront += "\"\r\n";
     if(this->binary) {
