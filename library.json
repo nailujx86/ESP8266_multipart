@@ -1,11 +1,11 @@
 {
-    "name": "ESP8266_multipart",
+    "name": "ESP32_multipart",
     "version": "1.1.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/nailujx86/ESP8266_multipart"
     },
-    "description": "A small multipart file sending library for the ESP8266.",
+    "description": "A small multipart file sending library for the ESP32.",
     "keywords": ["multipart", "filesending", "networking"],
     "authors": {
         "name": "Julian Blazek",

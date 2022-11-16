@@ -1,36 +1,36 @@
-#include "ESP8266_multipart.h"
+#include "ESP32_multipart.h"
 
-ESP8266_multipart::ESP8266_multipart() {
+ESP32_multipart::ESP32_multipart() {
   ESP8266_multipart::init("127.0.0.1", 80);
 }
-ESP8266_multipart::ESP8266_multipart(String host) {
+ESP32_multipart::ESP32_multipart(String host) {
   ESP8266_multipart::init(host.c_str(), 80);
 }
-ESP8266_multipart::ESP8266_multipart(const char* host) {
+ESP32_multipart::ESP32_multipart(const char* host) {
   ESP8266_multipart::init(host, 80);
 }
-void ESP8266_multipart::init(const char* host, int port) {
+void ESP32_multipart::init(const char* host, int port) {
   this->host = host;
   this->port = port;
   this->binary = false;
 }
-int ESP8266_multipart::sendFile(String path, File file) {
+int ESP32_multipart::sendFile(String path, File file) {
   return sendFile(path.c_str(), file);
 }
-void ESP8266_multipart::setPort(int port) {
+void ESP32_multipart::setPort(int port) {
   this->port = port;
 }
-void ESP8266_multipart::setHost(String host) {
+void ESP32_multipart::setHost(String host) {
   ESP8266_multipart::setHost(host.c_str());
 }
-void ESP8266_multipart::setHost(const char* host) {
+void ESP32_multipart::setHost(const char* host) {
   this->host = host;
 }
-void ESP8266_multipart::setBinary(bool binary) {
+void ESP32_multipart::setBinary(bool binary) {
   this->binary = binary;
 }
 
-int ESP8266_multipart::sendFile(const char* path, File file) {
+int ESP32_multipart::sendFile(const char* path, File file) {
   WiFiClient client;
   if(client.connect(this->host, this->port)) {
     client.print(F("POST ")); client.print(path); client.print(F(" HTTP/1.1\r\n"));
